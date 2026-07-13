@@ -1,45 +1,107 @@
-body {
-background-color: #fdebb6;
-}
-
+/* Globals & Typography */
 html {
-  font-size: 100%; /* Dynamically pulls user/browser default, usually 16px */
+  font-size: 100%; 
+  box-sizing: border-box;
 }
 
-.griffy-regular {
-  font-family: "Griffy", system-ui;
-  font-weight: 100;
-  font-style: normal;
+*, *:before, *:after {
+  box-sizing: inherit;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fdebb6; /* Fallback */
+}
+
 
 h1 {
-font-family: "Griffy", system-ui;
-text-align: center;
-color: #ed80a7;
-font-size: 2.5rem; 
+  font-family: "Griffy", system-ui;
+  color: #ed80a7;
+  font-size: 3rem; /* Using rem for scalability */
+  margin: 0.2rem 0;
 }
 
-h2 {
-font-family: "Griffy", system-ui;
-text-align: center;
-color: #ed80a7;
+p {
+  color: #5c646b;
+  font-family: system-ui, -apple-system, sans-serif; /* Clean modern font for standard reading */
+  line-height: 1.5;
 }
 
+.subtitle {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
 
+.disclaimer {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+/* Added Image Box */
+.slide-image {
+  margin: 2rem auto 0 auto;
+  max-width: 22rem;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(237, 128, 167, 0.15); /* Soft pinkish tint shadow */
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- BRAILLE ART STYLING --- */
 .braille-container {
-position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 1000;
-  display: inline-block;
-  padding: 10px;
-  margin: 10px;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 5;
+  opacity: 0.4; /* Slightly lowered opacity so it doesn't clash with image/text */
 }
+
 .braille-container pre {
   font-family: "Courier New", Courier, monospace;
-  font-size: 14px;
+  font-size: 0.65rem; /* Shrunk slightly using rem so it stays intact on desktop */
   color: #5c646b;
-  line-height: 1;       /* Prevents vertical gaps between lines */
-  letter-spacing: 0;    /* Prevents horizontal gaps between characters */
+  line-height: 1;      
+  letter-spacing: 0;    
   margin: 0;
-  white-space: pre;     /* Double ensures spaces don't collapse */
+  white-space: pre;     
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+/* Makes everything adapt perfectly to small mobile phone screens */
+@media (max-width: 600px) {
+  .first-slide {
+    padding-top: 1.5rem; /* Shorter top spacing on mobile phones */
+  }
+  
+  h1 {
+    font-size: 2.25rem; /* Smaller titles on phones so they don't break lines awkwardly */
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .slide-image {
+    max-width: 100%; /* Lets image adapt to the width of the phone */
+  }
+
+  /* Hiding or repositioning the braille container on mobile so it doesn't overlap text */
+  .braille-container {
+    position: relative;
+    margin-top: 2rem;
+    bottom: auto;
+    right: auto;
+    overflow-x: auto; /* Adds swipe scroll for the art if screen is too narrow */
+    max-width: 100%;
+  }
+}
