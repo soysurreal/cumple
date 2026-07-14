@@ -2,6 +2,7 @@ html {
   font-size: 100%; 
   box-sizing: border-box;
   scroll-behavior: smooth; 
+  scroll-snap-type: y mandatory;  /* Efecto imán vertical en toda la página */
 }
 
 *, *:before, *:after {
@@ -11,11 +12,11 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #fdebb6; 
+  /* Quitamos el color del body porque ahora cada slide tendrá el suyo propio */
 }
 
 /* --- ESTRUCTURA DE LOS SLIDES --- */
-.first-slide, .second-slide{
+.first-slide, .second-slide {
   min-height: 100vh; 
   width: 100%;
   position: relative; 
@@ -23,48 +24,83 @@ body {
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
-  
-  /* 1. Aumentamos el padding para que tu texto no tape las llaves de los bordes */
+  scroll-snap-align: start; /* Le dice al navegador dónde debe detenerse el imán del scroll */
+}
+
+/* --- PRIMER SLIDE (Solo el color de fondo) --- */
+.first-slide {
   padding: 4rem; 
-
-  /* 2. Mantenemos tu color de fondo */
   background-color: #fdebb6; 
+  position: relative;
+  overflow: hidden;
+}
 
-  /* 3. Cargamos la llave 4 veces: para arriba, abajo, izquierda y derecha */
+  /* --- LLAVES HORIZONTALES (Arriba y Abajo) --- */
+.first-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+
   background-image: 
-    url('DECO/key.png'), /* Borde superior */
-    url('DECO/key.png'), /* Borde inferior */
-    url('DECO/key.png'), /* Borde izquierdo */
-    url('DECO/key.png'); /* Borde derecho */
-
-  /* 4. Acomodamos cada tira de llaves en su respectivo lado */
+    url('DECO/key.png'), /* Superior */
+    url('DECO/key.png'); /* Inferior */
+    
   background-position: 
     top left, 
-    bottom left, 
+    bottom left;
+
+  background-repeat: 
+    repeat-x, 
+    repeat-x;
+
+  background-size: 
+    1.7rem 1.65rem, 
+    1.7rem 1.65rem;
+}
+
+/* --- LLAVES VERTICALES (Izquierda y Derecha) --- */
+.first-slide::after {
+  content: "";
+  position: absolute;
+  
+  /* Recortamos 2rem arriba y abajo para limpiar las esquinas perfectamente */
+  top: 2rem;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background-image: 
+    url('DECO/key.png'), /* Izquierda */
+    url('DECO/key.png'); /* Derecha */
+
+  background-position: 
     top left, 
     top right;
 
-  /* 5. Le decimos al navegador que las repita sin dejar ningún hueco */
   background-repeat: 
-    repeat-x, 
-    repeat-x, 
     repeat-y, 
     repeat-y;
 
-  /* 6. ¡EL TRUCO DE ORO! Aquí controlas el tamaño de las llaves.
-     Al usar '2rem 2rem', cada llave medirá eso. Como se repiten, 
-     quedarán perfectamente pegaditas una al lado de la otra. */
   background-size: 
-    2rem 2rem, /* Tamaño de las de arriba */
-    2rem 2rem, /* Tamaño de las de abajo */
-    2rem 2rem, /* Tamaño de las de la izquierda */
-    2rem 2rem; /* Tamaño de las de la derecha */
-}
+    1.65rem 1.65rem, 
+    1.65rem 1.65rem;
 }
 
-.intro-content {
-  text-align: center;
-  z-index: 10; 
+
+
+/* --- SEGUNDO SLIDE (LILA LIMPIO PARA EL QUIZ) --- */
+.second-slide {
+  padding: 2rem;
+  
+  /* Cambiado a tu hermoso color lila */
+  background-color: #f9d1c5; 
 }
 
 /* --- TIPOGRAFÍA --- */
@@ -192,6 +228,7 @@ p {
 /* --- DECORATION IMAGES --- */
 .FLOR {
   position: absolute; 
+  mix-blend-mode:soft-light;
   top: 2rem;          
   right: 2rem;         
   width: 10rem;        
@@ -213,18 +250,16 @@ p {
   to {
     transform: rotate(360deg);
   }
-} /* <--- ¡AQUÍ ESTÁ LA LLAVE QUE FALTABA! */
+} 
 
-/* --- LADYBUG CORREGIDA --- */
+/* --- LADYBUG --- */
 .LADYBUG { 
   position: absolute;
   top: 18rem;          
   left: 30rem;        
   width: 5rem;      
   z-index: 5;         
-
-/* Añade esta línea para inclinarla: */
-  transform: rotate(2deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  transform: rotate(2deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado *//* Añade esta línea para inclinarla: */
 }
 
 .LADYBUG img {
@@ -239,8 +274,6 @@ p {
   right: 30rem;        
   width: 9rem;      
   z-index: 5;         
-
-/* Añade esta línea para inclinarla: */
   transform: rotate(10deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
 }
 
@@ -249,3 +282,4 @@ p {
   height: auto;
   display: block;
 }
+
