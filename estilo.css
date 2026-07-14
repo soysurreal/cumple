@@ -1,7 +1,7 @@
 html {
   font-size: 100%; 
   box-sizing: border-box;
-  scroll-behavior: smooth; /* Añadido para que el scroll se sienta fluido */
+  scroll-behavior: smooth; 
 }
 
 *, *:before, *:after {
@@ -16,19 +16,19 @@ body {
 
 /* --- ESTRUCTURA DE LOS SLIDES --- */
 .first-slide, .second-slide {
-  min-height: 100vh; /* Obliga al contenedor a ocupar toda la altura de la pantalla */
+  min-height: 100vh; 
   width: 100%;
-  position: relative; /* Crucial para que el braille absoluto no se escape */
+  position: relative; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra el contenido verticalmente */
-  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: center; 
+  align-items: center; 
   padding: 2rem;
 }
 
 .intro-content {
   text-align: center;
-  z-index: 10; /* Asegura que el texto esté por encima del arte en braille */
+  z-index: 10; 
 }
 
 /* --- TIPOGRAFÍA --- */
@@ -38,16 +38,7 @@ h1 {
   font-size: 4rem; 
   margin: 0.2rem 0;
   line-height: 1.1;
-  
-  display: inline-block; /* Crucial para que los efectos de rotación funcionen correctamente */
-  
-  /* 
-    Llamamos a la animación:
-    - 'jitter': el nombre que le dimos abajo.
-    - '0.3s': la velocidad del ciclo (puedes cambiarlo para que tiemble más rápido o lento).
-    - 'steps(2)': fuerza al navegador a dar saltos bruscos en vez de un movimiento fluido.
-    - 'infinite': para que no pare nunca.
-  */
+  display: inline-block; 
   animation: jitter 2s steps(2) infinite;
 }
 
@@ -80,38 +71,24 @@ h2 {
 }
 
 p {
-  font-family:'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   line-height: 1.5;
 }
 
 .subtitle {
-  font-family: "Courier New", Courier, monospace; /* Fuente de máquina de escribir */
+  font-family: "Courier New", Courier, monospace; 
   font-size: 1.25rem;
   font-weight: bold;
   color: #5c646b;
-  border-right: 3px solid #5c646b;
   
-  /* Trucos de estructura */
   display: block;
-  white-space: nowrap;      /* Evita que el texto salte de línea */
-  overflow: hidden;         /* Esconde las letras antes de que se "escriban" */
-  border-right: 3px solid #5c646b; /* El cursor de la máquina de escribir */
+  white-space: nowrap;      
+  overflow: hidden;         
+  border-right: 3px solid #5c646b; 
   
-  /* Centrado */
   margin: 1.5rem auto 0 auto; 
-  
-  /* 
-    Ajusta el ancho según tu texto:
-    Para "04/08" (5 caracteres), usamos '5ch'.
-    La unidad 'ch' mide el ancho de un caracter. ¡Es perfecta para esto!
-  */
   width: 10ch; 
 
-  /* 
-    Llamamos a dos animaciones a la vez:
-    - 'escribir': dura 2 segundos, va dando saltos de 1 en 1 (5 letras) y se queda al final (forwards).
-    - 'parpadear': el cursor parpadea infinitamente.
-  */
   animation: 
     escribir 1s steps(10) forwards,
     parpadear 1s step-end infinite;
@@ -120,13 +97,13 @@ p {
 /* Animación para revelar el texto */
 @keyframes escribir {
   from { width: 0; }
-  to { width: 10ch; } /* Debe coincidir con el ancho que pusiste arriba */
+  to { width: 10ch; } 
 }
 
 /* Animación para el cursor parpadeante */
 @keyframes parpadear {
   from, to { border-color: transparent }
-  50% { border-color: #5c646b; } /* <--- ¡Aquí estaba el truco! */
+  50% { border-color: #5c646b; } 
 }
 
 /* --- BRAILLE ART --- */
@@ -174,22 +151,21 @@ p {
 
 /* --- DECORATION IMAGES --- */
 .FLOR {
-  position: absolute; /* Takes it out of the normal flow */
-  top: 2rem;          /* Distance from the top */
-  left: 2rem;         /* Distance from the left */
-  width: 6rem;        /* Made it a bit smaller for a corner decoration */
-  z-index: 5;         /* Keeps it visible */
+  position: absolute; 
+  top: 2rem;          
+  right: 2rem;         
+  width: 10rem;        
+  z-index: 5;         
 }
 
 .FLOR img {
   width: 100%;
   height: auto;
   display: block;
-  /* This line calls the animation below: spins taking 15 seconds, smooth, forever */
   animation: girar 3s linear infinite; 
 }
 
-/* This is the magic that makes it move in circles */
+/* Animación de la flor cerrada correctamente con su llave al final */
 @keyframes girar {
   from {
     transform: rotate(0deg);
@@ -197,5 +173,22 @@ p {
   to {
     transform: rotate(360deg);
   }
-  
+} /* <--- ¡AQUÍ ESTÁ LA LLAVE QUE FALTABA! */
+
+/* --- LADYBUG CORREGIDA --- */
+.LADYBUG { 
+  position: absolute;
+  top: 18rem;          
+  left: 30rem;        
+  width: 5rem;      
+  z-index: 5;         
+
+/* Añade esta línea para inclinarla: */
+  transform: rotate(2deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+}
+
+.LADYBUG img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
