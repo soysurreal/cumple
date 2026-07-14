@@ -15,7 +15,7 @@ body {
 }
 
 /* --- ESTRUCTURA DE LOS SLIDES --- */
-.first-slide, .second-slide {
+.first-slide, .second-slide{
   min-height: 100vh; 
   width: 100%;
   position: relative; 
@@ -23,7 +23,43 @@ body {
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
-  padding: 2rem;
+  
+  /* 1. Aumentamos el padding para que tu texto no tape las llaves de los bordes */
+  padding: 4rem; 
+
+  /* 2. Mantenemos tu color de fondo */
+  background-color: #fdebb6; 
+
+  /* 3. Cargamos la llave 4 veces: para arriba, abajo, izquierda y derecha */
+  background-image: 
+    url('DECO/key.png'), /* Borde superior */
+    url('DECO/key.png'), /* Borde inferior */
+    url('DECO/key.png'), /* Borde izquierdo */
+    url('DECO/key.png'); /* Borde derecho */
+
+  /* 4. Acomodamos cada tira de llaves en su respectivo lado */
+  background-position: 
+    top left, 
+    bottom left, 
+    top left, 
+    top right;
+
+  /* 5. Le decimos al navegador que las repita sin dejar ningún hueco */
+  background-repeat: 
+    repeat-x, 
+    repeat-x, 
+    repeat-y, 
+    repeat-y;
+
+  /* 6. ¡EL TRUCO DE ORO! Aquí controlas el tamaño de las llaves.
+     Al usar '2rem 2rem', cada llave medirá eso. Como se repiten, 
+     quedarán perfectamente pegaditas una al lado de la otra. */
+  background-size: 
+    2rem 2rem, /* Tamaño de las de arriba */
+    2rem 2rem, /* Tamaño de las de abajo */
+    2rem 2rem, /* Tamaño de las de la izquierda */
+    2rem 2rem; /* Tamaño de las de la derecha */
+}
 }
 
 .intro-content {
@@ -127,10 +163,14 @@ p {
 
 /* --- MÓVIL --- */
 @media (max-width: 600px) {
+  .first-slide {
+    border-width: 1.25rem; /* Reducimos el marco a la mitad en celulares */
+  }
+  
   h1 {
     font-size: 2.5rem; 
   }
-
+  
   .subtitle {
     font-size: 1rem;
   }
@@ -188,6 +228,23 @@ p {
 }
 
 .LADYBUG img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.MONKEY { 
+  position: absolute;
+  top: 28rem;          
+  right: 30rem;        
+  width: 9rem;      
+  z-index: 5;         
+
+/* Añade esta línea para inclinarla: */
+  transform: rotate(10deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+}
+
+.MONKEY img {
   width: 100%;
   height: auto;
   display: block;
