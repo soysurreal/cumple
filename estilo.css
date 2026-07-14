@@ -1,7 +1,7 @@
-/* Globals & Typography */
 html {
   font-size: 100%; 
   box-sizing: border-box;
+  scroll-behavior: smooth; /* Añadido para que el scroll se sienta fluido */
 }
 
 *, *:before, *:after {
@@ -11,64 +11,136 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #fdebb6; /* Fallback */
+  background-color: #fdebb6; 
 }
 
+/* --- ESTRUCTURA DE LOS SLIDES --- */
+.first-slide, .second-slide {
+  min-height: 100vh; /* Obliga al contenedor a ocupar toda la altura de la pantalla */
+  width: 100%;
+  position: relative; /* Crucial para que el braille absoluto no se escape */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+  align-items: center; /* Centra el contenido horizontalmente */
+  padding: 2rem;
+}
 
+.intro-content {
+  text-align: center;
+  z-index: 10; /* Asegura que el texto esté por encima del arte en braille */
+}
+
+/* --- TIPOGRAFÍA --- */
 h1 {
   font-family: "Griffy", system-ui;
   color: #ed80a7;
-  font-size: 3rem; /* Using rem for scalability */
+  font-size: 4rem; 
   margin: 0.2rem 0;
+  line-height: 1.1;
+  
+  display: inline-block; /* Crucial para que los efectos de rotación funcionen correctamente */
+  
+  /* 
+    Llamamos a la animación:
+    - 'jitter': el nombre que le dimos abajo.
+    - '0.3s': la velocidad del ciclo (puedes cambiarlo para que tiemble más rápido o lento).
+    - 'steps(2)': fuerza al navegador a dar saltos bruscos en vez de un movimiento fluido.
+    - 'infinite': para que no pare nunca.
+  */
+  animation: jitter 2s steps(2) infinite;
+}
+
+/* Definimos los pequeños fotogramas del temblor */
+@keyframes jitter {
+  0% {
+    transform: translate(1px, 1px) rotate(0.5deg);
+  }
+  20% {
+    transform: translate(-1px, -1px) rotate(-0.5deg);
+  }
+  40% {
+    transform: translate(-1.5px, 1px) rotate(0.2deg);
+  }
+  60% {
+    transform: translate(1px, -1.5px) rotate(-0.2deg);
+  }
+  80% {
+    transform: translate(-1px, 1px) rotate(0.5deg);
+  }
+  100% {
+    transform: translate(1px, -1px) rotate(-0.5deg);
+  }
+}
+
+h2 {
+  font-family: "Griffy", system-ui;
+  color: #ed80a7;
+  font-size: 3rem;
 }
 
 p {
-  color: #5c646b;
-  font-family: system-ui, -apple-system, sans-serif; /* Clean modern font for standard reading */
+  font-family:'Times New Roman', Times, serif;
   line-height: 1.5;
 }
 
 .subtitle {
-  font-size: 1.15rem;
-  font-weight: 500;
-  margin-top: 1.5rem;
+  font-family: "Courier New", Courier, monospace; /* Fuente de máquina de escribir */
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #5c646b;
+  border-right: 3px solid #5c646b;
+  
+  /* Trucos de estructura */
+  display: block;
+  white-space: nowrap;      /* Evita que el texto salte de línea */
+  overflow: hidden;         /* Esconde las letras antes de que se "escriban" */
+  border-right: 3px solid #5c646b; /* El cursor de la máquina de escribir */
+  
+  /* Centrado */
+  margin: 1.5rem auto 0 auto; 
+  
+  /* 
+    Ajusta el ancho según tu texto:
+    Para "04/08" (5 caracteres), usamos '5ch'.
+    La unidad 'ch' mide el ancho de un caracter. ¡Es perfecta para esto!
+  */
+  width: 10ch; 
+
+  /* 
+    Llamamos a dos animaciones a la vez:
+    - 'escribir': dura 2 segundos, va dando saltos de 1 en 1 (5 letras) y se queda al final (forwards).
+    - 'parpadear': el cursor parpadea infinitamente.
+  */
+  animation: 
+    escribir 1s steps(10) forwards,
+    parpadear 1s step-end infinite;
 }
 
-.disclaimer {
-  font-size: 0.95rem;
-  opacity: 0.8;
-  margin-top: 0.5rem;
+/* Animación para revelar el texto */
+@keyframes escribir {
+  from { width: 0; }
+  to { width: 10ch; } /* Debe coincidir con el ancho que pusiste arriba */
 }
 
-/* Added Image Box */
-.slide-image {
-  margin: 2rem auto 0 auto;
-  max-width: 22rem;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(237, 128, 167, 0.15); /* Soft pinkish tint shadow */
+/* Animación para el cursor parpadeante */
+@keyframes parpadear {
+  from, to { border-color: transparent }
+  50% { border-color: #5c646b; } /* <--- ¡Aquí estaba el truco! */
 }
 
-.slide-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* --- BRAILLE ART STYLING --- */
+/* --- BRAILLE ART --- */
 .braille-container {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
   z-index: 5;
-  opacity: 0.4; /* Slightly lowered opacity so it doesn't clash with image/text */
+  opacity: 0.4; 
 }
 
 .braille-container pre {
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.65rem; /* Shrunk slightly using rem so it stays intact on desktop */
+  font-size: 0.65rem; 
   color: #5c646b;
   line-height: 1;      
   letter-spacing: 0;    
@@ -76,15 +148,10 @@ p {
   white-space: pre;     
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
-/* Makes everything adapt perfectly to small mobile phone screens */
+/* --- MÓVIL --- */
 @media (max-width: 600px) {
-  .first-slide {
-    padding-top: 1.5rem; /* Shorter top spacing on mobile phones */
-  }
-  
   h1 {
-    font-size: 2.25rem; /* Smaller titles on phones so they don't break lines awkwardly */
+    font-size: 2.5rem; 
   }
 
   .subtitle {
@@ -92,16 +159,43 @@ p {
   }
 
   .slide-image {
-    max-width: 100%; /* Lets image adapt to the width of the phone */
+    max-width: 100%; 
   }
 
-  /* Hiding or repositioning the braille container on mobile so it doesn't overlap text */
   .braille-container {
     position: relative;
     margin-top: 2rem;
     bottom: auto;
     right: auto;
-    overflow-x: auto; /* Adds swipe scroll for the art if screen is too narrow */
+    overflow-x: auto; 
     max-width: 100%;
   }
+}
+
+/* --- DECORATION IMAGES --- */
+.FLOR {
+  position: absolute; /* Takes it out of the normal flow */
+  top: 2rem;          /* Distance from the top */
+  left: 2rem;         /* Distance from the left */
+  width: 6rem;        /* Made it a bit smaller for a corner decoration */
+  z-index: 5;         /* Keeps it visible */
+}
+
+.FLOR img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* This line calls the animation below: spins taking 15 seconds, smooth, forever */
+  animation: girar 3s linear infinite; 
+}
+
+/* This is the magic that makes it move in circles */
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+  
 }
