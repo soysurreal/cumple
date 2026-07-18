@@ -30,7 +30,7 @@ body {
 /* --- PRIMER SLIDE (Solo el color de fondo) --- */
 .first-slide {
   padding: 4rem; 
-  background-color: #fdebb6; 
+  background-color: #fdebb6;
   position: relative;
   overflow: hidden;
 }
@@ -95,12 +95,12 @@ body {
 
 
 
-/* --- SEGUNDO SLIDE (LILA LIMPIO PARA EL QUIZ) --- */
+/* --- SEGUNDO SLIDE (AMARILLO LIMPIO PARA EL QUIZ) --- */
 .second-slide {
   padding: 2rem;
   
-  /* Cambiado a tu hermoso color lila */
-  background-color: #f9d1c5; 
+  
+  background-color: #fdebb6; 
 }
 
 /* --- TIPOGRAFÍA --- */
@@ -151,12 +151,12 @@ p {
   font-family: "Courier New", Courier, monospace; 
   font-size: 1.25rem;
   font-weight: bold;
-  color: #5c646b;
+  color: #31241b;
   
   display: block;
   white-space: nowrap;      
   overflow: hidden;         
-  border-right: 3px solid #5c646b; 
+  border-right: 3px solid black; 
   
   margin: 1.5rem auto 0 auto; 
   width: 10ch; 
@@ -175,7 +175,7 @@ p {
 /* Animación para el cursor parpadeante */
 @keyframes parpadear {
   from, to { border-color: transparent }
-  50% { border-color: #5c646b; } 
+  50% { border-color: #31241b; } 
 }
 
 /* --- BRAILLE ART --- */
@@ -252,10 +252,10 @@ p {
   }
 } 
 
-/* --- LADYBUG --- */
+/* --- LPS --- */
 .LADYBUG { 
   position: absolute;
-  top: 18rem;          
+  top: 15rem;          
   left: 30rem;        
   width: 5rem;      
   z-index: 5;         
@@ -278,6 +278,66 @@ p {
 }
 
 .MONKEY img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.LAMB { 
+  position: absolute;
+  top: 16rem;          
+  right: 40rem;        
+  width: 10rem;      
+  z-index: 5;         
+  transform: rotate(7deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+}
+
+.LAMB img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.COW { 
+  position: absolute;
+  top: 16rem;          
+  right: 80rem;        
+  width: 4rem;      
+  z-index: 5;         
+  transform: rotate(7deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+}
+
+.COW img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.VOLADO { 
+  position: absolute;
+  top: 16rem;          
+  left: 40rem;        
+  width: 10rem;      
+  z-index: 5;         
+  transform: rotate(7deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+}
+
+.VOLADO img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.DEER { 
+  position: absolute;
+  bottom: 16rem;          
+  right: 43rem;        
+  width: 11rem;      
+  z-index: 5;         
+  transform: rotate(-9deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+}
+
+.DEER img {
   width: 100%;
   height: auto;
   display: block;
