@@ -255,11 +255,11 @@ p {
 /* --- LPS --- */
 .LADYBUG { 
   position: absolute;
-  top: 15rem;          
-  left: 30rem;        
-  width: 5rem;      
+  top: 14rem;          
+  left: 29rem;        
+  width: 5.5rem;      
   z-index: 5;         
-  transform: rotate(2deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado *//* Añade esta línea para inclinarla: */
+  transform: rotate(-6deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado *//* Añade esta línea para inclinarla: */
 }
 
 .LADYBUG img {
@@ -270,11 +270,11 @@ p {
 
 .MONKEY { 
   position: absolute;
-  top: 28rem;          
-  right: 30rem;        
-  width: 9rem;      
+  top: 7rem;          
+  left: 42rem;        
+  width: 10rem;      
   z-index: 5;         
-  transform: rotate(10deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  transform: rotate(5deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
 }
 
 .MONKEY img {
@@ -285,11 +285,11 @@ p {
 
 .LAMB { 
   position: absolute;
-  top: 30rem;          
-  right: 40rem;        
-  width: 10rem;      
+  bottom: 8rem;          
+  right: 42rem;        
+  width: 12rem;      
   z-index: 5;         
-  transform: rotate(7deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  transform: rotate(2deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
 }
 
 .LAMB img {
@@ -300,11 +300,11 @@ p {
 
 .COW { 
   position: absolute;
-  top: 30rem;          
-  right: 50rem;        
+  bottom: 14rem;          
+  left: 30rem;        
   width: 8rem;      
   z-index: 5;         
-  transform: rotate(7deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  transform: rotate(-14deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
 }
 
 .COW img {
@@ -315,11 +315,11 @@ p {
 
 .VOLADO { 
   position: absolute;
-  top: 25rem;          
-  left: 25rem;        
+  top: 11rem;          
+  right: 30rem;        
   width: 5rem;      
   z-index: 5;         
-  transform: rotate(7deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  transform: rotate(6deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
 }
 
 .VOLADO img {
@@ -330,11 +330,11 @@ p {
 
 .DEER { 
   position: absolute;
-  bottom: 18rem;          
-  right: 28rem;        
+  bottom: 14rem;          
+  right: 30rem;        
   width: 8rem;      
   z-index: 5;         
-  transform: rotate(-9deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  transform: rotate(12deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
 }
 
 .DEER img {
