@@ -100,7 +100,7 @@ body {
   padding: 2rem;
   
   
-  background-color: #fdebb6; 
+  background-color: #ccde80; 
 }
 
 /* --- TIPOGRAFÍA --- */
@@ -225,121 +225,179 @@ p {
   }
 }
 
-/* --- DECORATION IMAGES --- */
-.FLOR {
-  position: absolute; 
-  mix-blend-mode:soft-light;
-  top: 2rem;          
-  right: 2rem;         
-  width: 10rem;        
-  z-index: 5;         
-}
+/* --- DECO IMG --- */
 
-.FLOR img {
-  width: 100%;
-  height: auto;
-  display: block;
-  animation: girar 3s linear infinite; 
-}
+/* ==========================================
+   1. LOS DOS FOTOGRAMAS DEL STOP MOTION
+   ========================================== */
 
-/* Animación de la flor cerrada correctamente con su llave al final */
-@keyframes girar {
-  from {
-    transform: rotate(0deg);
+/* Animación para que aparezcan saltando (escala y opacidad) */
+@keyframes aparecerStopMotion {
+  0% { 
+    opacity: 0; 
+    transform: scale(0) rotate(var(--rotacion-base)); 
   }
-  to {
-    transform: rotate(360deg);
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.1) rotate(var(--rotacion-base)); /* Un pequeño rebote tosco */
   }
-} 
-
-/* --- LPS --- */
-.LADYBUG { 
-  position: absolute;
-  top: 14rem;          
-  left: 29rem;        
-  width: 5.5rem;      
-  z-index: 5;         
-  transform: rotate(-6deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado *//* Añade esta línea para inclinarla: */
+  100% { 
+    opacity: 1; 
+    transform: scale(1) rotate(var(--rotacion-base)); 
+  }
 }
 
-.LADYBUG img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* El "tembleque" infinito estilo marioneta de plastilina */
+@keyframes jitterEfecto {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-2px, 1px) rotate(-1deg); }
+  66% { transform: translate(1px, -1px) rotate(1.5deg); }
 }
 
-.MONKEY { 
-  position: absolute;
-  top: 7rem;          
-  left: 42rem;        
-  width: 10rem;      
-  z-index: 5;         
-  transform: rotate(5deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+
+/* ==========================================
+   1. ANIMACIÓN DE ENTRADA (STOP-MOTION)
+   ========================================== */
+@keyframes aparecerStopMotion {
+  0% { 
+    opacity: 0; 
+    transform: scale(0) rotate(var(--rotacion-base)); 
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.1) rotate(var(--rotacion-base)); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) rotate(var(--rotacion-base)); 
+  }
 }
 
-.MONKEY img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* ==========================================
+   2. LAS 4 VARIACIONES DE JITTER (SCRAPBOOK)
+   ========================================== */
+
+/* Variación A: Movimiento loco y rotación marcada */
+@keyframes jitterLoco {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-3px, 2px) rotate(-2.5deg); }
+  66% { transform: translate(2px, -2px) rotate(3deg); }
 }
 
-.LAMB { 
-  position: absolute;
-  bottom: 8rem;          
-  right: 42rem;        
-  width: 12rem;      
-  z-index: 5;         
-  transform: rotate(2deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+/* Variación B: Saltitos verticales (arriba y abajo) */
+@keyframes jitterSaltarin {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(1px, -3px) rotate(1deg); }
+  66% { transform: translate(-1px, 3px) rotate(-1.5deg); }
 }
 
-.LAMB img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Variación C: Balanceo horizontal (izquierda a derecha) */
+@keyframes jitterLadoALado {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-4px, 0px) rotate(-1deg); }
+  66% { transform: translate(3px, 1px) rotate(2deg); }
 }
 
-.COW { 
-  position: absolute;
-  bottom: 14rem;          
-  left: 30rem;        
-  width: 8rem;      
-  z-index: 5;         
-  transform: rotate(-14deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+/* Variación D: Vibración sutil y muy rápida */
+@keyframes jitterSutil {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(1.5px, 1.5px) rotate(0.5deg); }
+  66% { transform: translate(-1.5px, -1px) rotate(-0.5deg); }
 }
 
-.COW img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+/* --- LPS 1 --- */
 
+/* --- VOLADO --- */
 .VOLADO { 
-  position: absolute;
-  top: 11rem;          
-  right: 30rem;        
-  width: 5rem;      
-  z-index: 5;         
-  transform: rotate(6deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  position: absolute; top: 11rem; right: 30rem; width: 5rem; z-index: 5;         
+  --rotacion-base: 6deg;
+  transform: rotate(var(--rotacion-base)); 
+  opacity: 0;
+  animation: aparecerStopMotion 0.4s steps(3) forwards;
+  animation-delay: 0.2s;
 }
-
 .VOLADO img {
-  width: 100%;
-  height: auto;
-  display: block;
+  width: 100%; height: auto; display: block;
+  animation: jitterSaltarin 0.40s steps(1) 5; 
+  animation-delay: 0.2s;
 }
 
+/* --- COW --- */
+.COW { 
+  position: absolute; bottom: 14rem; left: 30rem; width: 8rem; z-index: 5;         
+  --rotacion-base: -14deg;
+  transform: rotate(var(--rotacion-base)); 
+  opacity: 0;
+  animation: aparecerStopMotion 0.4s steps(3) forwards;
+  animation-delay: 0.4s;
+}
+.COW img {
+  width: 100%; height: auto; display: block;
+  animation: jitterLadoALado 0.42s steps(1) 5;
+  animation-delay: 0.4s;
+}
+
+/* --- LPS 2 --- */
+
+/* --- OVEJA --- */
+.LAMB { 
+  position: absolute; bottom: 8rem; right: 42rem; width: 12rem; z-index: 5;         
+  --rotacion-base: 2deg;
+  transform: rotate(var(--rotacion-base)); 
+  opacity: 0;
+  animation: aparecerStopMotion 0.4s steps(3) forwards;
+  animation-delay: 0.6s;
+}
+.LAMB img {
+  width: 100%; height: auto; display: block;
+  animation:  jitterLoco 0.44s steps(1) 5; 
+  animation-delay: 0.6s;
+}
+
+/* --- MARIQUITA --- */
+.LADYBUG { 
+  position: absolute; top: 14rem; left: 29rem; width: 5.5rem; z-index: 5;         
+  --rotacion-base: -6deg;
+  transform: rotate(var(--rotacion-base)); 
+  opacity: 0;
+  animation: aparecerStopMotion 0.4s steps(3) forwards;
+  animation-delay: 0.8s;
+}
+.LADYBUG img {
+  width: 100%; height: auto; display: block;
+  /* Tiembla 5 veces justo al aparecer (0.2s x 5 = 1 segundo de movimiento) */
+  animation: jitterSaltarin 0.46s steps(1) 5;
+  animation-delay: 0.8s;
+}
+
+/* --- LPS 3 --- */
+
+/* --- MONKEY --- */
+.MONKEY { 
+  position: absolute; top: 7rem; left: 42rem; width: 10rem; z-index: 5;         
+  --rotacion-base: 5deg;
+  transform: rotate(var(--rotacion-base)); 
+  opacity: 0;
+  animation: aparecerStopMotion 0.4s steps(3) forwards;
+  animation-delay: 1s;
+}
+.MONKEY img {
+  width: 100%; height: auto; display: block;
+  animation: jitterLadoALado 0.48s steps(1) 5;
+  animation-delay: 1s;
+}
+
+/* --- DEER --- */
 .DEER { 
-  position: absolute;
-  bottom: 14rem;          
-  right: 30rem;        
-  width: 8rem;      
-  z-index: 5;         
-  transform: rotate(12deg); /* <--- Usa valores negativos como -15deg para inclinarla al otro lado */
+  position: absolute; bottom: 14rem; right: 30rem; width: 8rem; z-index: 5;         
+  --rotacion-base: 12deg;
+  transform: rotate(var(--rotacion-base)); 
+  opacity: 0;
+  animation: aparecerStopMotion 0.4s steps(3) forwards;
+  animation-delay: 1.2s;
 }
-
 .DEER img {
-  width: 100%;
-  height: auto;
-  display: block;
+  width: 100%; height: auto; display: block;
+  animation: jitterSaltarin 0.50s steps(1) 5; 
+  animation-delay: 1.2s;
 }
-
